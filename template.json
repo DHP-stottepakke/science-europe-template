@@ -2,7 +2,7 @@
     "organizationId": "research.data.no",
     "templateId": "science-europe-norway",
     "version": "1.0.0",
-    "name": "Science Europe DMP Template (Norway)",
+    "name": "Research Council of Norway/Science Europe DMP Template",
     "description": "DMP template recommended by Science Europe, based on the Norwegian generic knowledge model",
     "license": "Apache-2.0",
     "metamodelVersion": "18.1",
@@ -118,11 +118,15 @@
         }
     ],
     "_tdk": {
-        "version": "4.1.0",
+        "version": "4.28.0",
         "readmeFile": "README.md",
         "files": [
             "src/*",
-            "src/**/*"
+            "src/**/*",
+            "!tools/",
+            "!.git/",
+            "!.env",
+            "!**/__pycache__/"
         ]
     }
 }
