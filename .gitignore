@@ -1,5 +1,10 @@
 env/
 .env
+.venv/
 template.zip
 template*.zip
+*.zip
 .DS_Store
+__pycache__/
+*.pyc
+DSW-*-export.json

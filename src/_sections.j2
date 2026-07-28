@@ -1,0 +1,198 @@
+{#-
+  Document skeleton: the Science Europe DMP questions mapped onto the Norwegian
+  knowledge model (research.data.no:norway-generic).
+
+  Sections and the 15 numbered questions follow the Science Europe "Practical Guide
+  to the International Alignment of Research Data Management". Each block lists
+  anchor questions as "<chapterKey>.<questionKey>" json.key pairs; keys are
+  chapter-qualified because json.key is only unique within a chapter. Every anchor
+  is a top-level question of a live (annotated) chapter, so its reply path is
+  deterministic; follow-up questions and list items below an anchor are rendered
+  recursively and must not be listed here.
+
+  Anchors are rendered at most once per document (see renderByKey in
+  _renderers.html.j2), so the first block listing a key wins.
+
+  Selection is driven by the KM's "RCN/Science Europe" tag. Anchors that do not
+  carry that tag but that a Science Europe question explicitly asks for are included
+  anyway; tools/check_sections.py reports both directions of that comparison.
+
+  Question 13 (persistent identifiers) has no anchor of its own: the Norwegian model
+  asks about PIDs inside the dataset and software list questions, which are rendered
+  under questions 10 and 12. A block with no resolvable anchor renders nothing at
+  all, heading included (see content.html.j2).
+
+  Questions used for the front matter (contributors, project metadata, DMP title)
+  are handled in contributors.html.j2 / projects.html.j2 and are absent here.
+-#}
+{%- set sections = [
+  {
+    "id": "sec-data-collection",
+    "title": "Section 1: Data description and collection or re-use of existing data",
+    "blocks": [
+      {
+        "heading": "1. How will new data be collected or produced and/or how will existing data be re-used?",
+        "anchors": [
+          "reusingCollectingChapter.hasMeasuredData",
+          "reusingCollectingChapter.hasNonMeasuredData",
+          "reusingCollectingChapter.collectsPhysicalSample",
+          "reusingCollectingChapter.reDatasetsRecords",
+          "reusingCollectingChapter.generateResearchSoftware",
+          "reusingCollectingChapter.gather"
+        ]
+      },
+      {
+        "heading": "2. What data (kind, format, volume) will be collected or produced?",
+        "anchors": [
+          "storingProtectingChapter.expectedTotalVolume",
+          "processingDataChapter.otherFormThanArchive"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sec-docs-metadata",
+    "title": "Section 2: Documentation and data quality",
+    "blocks": [
+      {
+        "heading": "3. What metadata and documentation (for example the methodology of data collection and way of organizing data) will accompany the data?",
+        "anchors": [
+          "creatingData.miaStandardsExist",
+          "creatingData.connectRespectiveMetadata",
+          "creatingData.usesVocabularies",
+          "storingProtectingChapter.appointments"
+        ]
+      },
+      {
+        "heading": "4. What data quality control measures will be used?",
+        "anchors": [
+          "processingDataChapter.monitorIntegrity",
+          "processingDataChapter.resultsIntegrityValidation",
+          "processingDataChapter.integratingDataSourcesMoreInfo",
+          "processingDataChapter.integratingDataSourcesMoreSamples"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sec-storage-backup",
+    "title": "Section 3: Storage and backup during research process",
+    "blocks": [
+      {
+        "heading": "5. How will data and metadata be stored and backed up during the research?",
+        "anchors": [
+          "storingProtectingChapter.storeDocuments",
+          "storingProtectingChapter.storageGuidelinesFollowing",
+          "storingProtectingChapter.storageChangeNeeds",
+          "processingDataChapter.fileVersioningDocs"
+        ]
+      },
+      {
+        "heading": "6. How will data security and protection of sensitive data be taken care of during the research?",
+        "anchors": [
+          "storingProtectingChapter.dataLossLeakVandalismRisks",
+          "processingDataChapter.processingAffectInformation",
+          "processingDataChapter.sharedWorkingSpace",
+          "storingProtectingChapter.workTogetherDocuments"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sec-ethics-legal",
+    "title": "Section 4: Legal and ethical requirements, codes of conduct",
+    "blocks": [
+      {
+        "heading": "7. If personal data are processed, how will compliance with legislation on personal data and on security be ensured?",
+        "anchors": [
+          "legalEthicalAspectsChapter.personalCollectedProcessed",
+          "legalEthicalAspectsChapter.sensitiveInformationThan"
+        ]
+      },
+      {
+        "heading": "8. How will other legal issues, such as intellectual property rights and ownership, be managed? What legislation is applicable?",
+        "anchors": [
+          "creatingData.collectedDataRights",
+          "creatingData.dataUseRestrictions",
+          "creatingData.assignsLicense",
+          "legalEthicalAspectsChapter.involvedInstitutionPartner",
+          "administrativeInformation.institutionalPoliciesGuidelines"
+        ]
+      },
+      {
+        "heading": "9. What ethical issues and codes of conduct are there, and how will they be taken into account?",
+        "anchors": [
+          "legalEthicalAspectsChapter.requiresEthicalApproval",
+          "legalEthicalAspectsChapter.indicateApplicableGeneral",
+          "legalEthicalAspectsChapter.additionalEthicalGuidelines"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sec-sharing-preservation",
+    "title": "Section 5: Data sharing and long-term preservation",
+    "blocks": [
+      {
+        "heading": "10. How and when will data be shared? Are there possible restrictions to data sharing or embargo reasons?",
+        "anchors": [
+          "archivingPublishingChapter.allOpenOverTime",
+          "archivingPublishingChapter.distributions",
+          "reusingCollectingChapter.whoInterested"
+        ]
+      },
+      {
+        "heading": "11. How will data for preservation be selected, and where data will be preserved long-term (for example a data repository or archive)?",
+        "anchors": [
+          "archivingPublishingChapter.identifyArchiveDepositing",
+          "archivingPublishingChapter.listHaveDelete"
+        ]
+      },
+      {
+        "heading": "12. What methods or software tools are needed to access and use data?",
+        "anchors": [
+          "archivingPublishingChapter.softwarePackages"
+        ]
+      },
+      {
+        "heading": "13. How will the application of a unique and persistent identifier (such as a Digital Object Identifier (DOI)) to each data set be ensured?",
+        "anchors": []
+      }
+    ]
+  },
+  {
+    "id": "sec-responsibilities-resources",
+    "title": "Section 6: Data management responsibilities and resources",
+    "blocks": [
+      {
+        "heading": "14. Who (for example role, position, and institution) will be responsible for data management (i.e. the data steward)?",
+        "anchors": [
+          "responsibilitiesResourcesChapter.haveManagementResponsibilities",
+          "responsibilitiesResourcesChapter.requiresSpecialist",
+          "administrativeInformation.didConsultResearch"
+        ]
+      },
+      {
+        "heading": "15. What resources (for example financial and time) will be dedicated to data management and ensuring that data will be FAIR (Findable, Accessible, Interoperable, Re-usable)?",
+        "anchors": [
+          "responsibilitiesResourcesChapter.requiresSpecialHardwareSoftware",
+          "responsibilitiesResourcesChapter.specialArrangementsAccess",
+          "processingDataChapter.planComputeCapacity",
+          "responsibilitiesResourcesChapter.storageActivePhase",
+          "responsibilitiesResourcesChapter.preservationArchivingAssociated",
+          "responsibilitiesResourcesChapter.hasDataPublicationBudget",
+          "responsibilitiesResourcesChapter.recurringFees",
+          "responsibilitiesResourcesChapter.totalCostsManagement"
+        ]
+      },
+      {
+        "heading": "Maintenance of this data management plan",
+        "anchors": [
+          "administrativeInformation.haveMadePlans",
+          "administrativeInformation.havePublishedPublish",
+          "administrativeInformation.dmpRelatedDmp"
+        ]
+      }
+    ]
+  }
+] -%}
