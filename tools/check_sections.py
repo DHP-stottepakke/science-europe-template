@@ -26,11 +26,12 @@ from pathlib import Path
 
 KEY_RE = re.compile(r'"([A-Za-z][A-Za-z0-9_]*\.[A-Za-z][A-Za-z0-9_]*)"')
 
-# Front-matter questions are rendered by contributors.html.j2 / projects.html.j2,
-# so they are expected to be tagged but absent from the section skeleton.
+# Front-matter questions are rendered by header.html.j2 / contributors.html.j2 /
+# projects.html.j2, so they are expected to be tagged but absent from the skeleton.
 FRONT_MATTER = {
     'administrativeInformation.contributors',
     'administrativeInformation.dmpTitle',
+    'administrativeInformation.dmpRelatedDmp',
     'researchProjectChapter.name',
     'researchProjectChapter.abstract',
     'researchProjectChapter.startDate',

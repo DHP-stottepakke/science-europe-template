@@ -1,7 +1,12 @@
 {#-
-  DMP metadata block. Contact people are the contributors whose role choice carries
-  the "contactPerson" json.value; the Norwegian model has no separate "creator of
-  DMP" role, so the DSW project creator is used for "Created by".
+  Title page, shared by every output format.
+
+  Contact people are the contributors whose role choice carries the "contactPerson"
+  json.value.
+
+  "Related DMP(s) or formal document(s)" is answered here rather than in the section
+  skeleton: it describes this DMP, not the data, so it belongs with the rest of the
+  front-page metadata (see the FRONT_MATTER list in tools/check_sections.py).
 -#}
 {%- set contributorItems = replies.administrativeInformation.contributors if replies.administrativeInformation else [] -%}
 {%- set contacts = [] -%}
@@ -10,8 +15,10 @@
     {%- do contacts.append(item) -%}
   {%- endif -%}
 {%- endfor -%}
+{%- set relatedDmp = replies.administrativeInformation.dmpRelatedDmp if replies.administrativeInformation else None -%}
+{%- set relatedItems = relatedDmp.listRelatedDmp if relatedDmp and relatedDmp.listRelatedDmp else [] -%}
 <header>
-  <p class="dmp"></p>
+  <p class="dmp">Data Management Plan</p>
   <h1>
     {{ dc.project.name }}
   </h1>
@@ -37,16 +44,43 @@
                   <br><a href="mailto:{{ contact.email._value }}">{{ contact.email._value }}</a>
                 {%- endif -%}
                 {%- if contact.orcid and contact.orcid._value %}
-                  <br>{{ contact.orcid._value|markdown }}
+                  <br>{{ globals.mdInline(contact.orcid._value) }}
                 {%- endif -%}
                 {%- if contact.affiliation and contact.affiliation._value %}
-                  <br>{{ contact.affiliation._value|markdown }}
+                  <br>{{ globals.mdInline(contact.affiliation._value) }}
                 {%- endif -%}
               </li>
             {%- endfor -%}
           </ul>
         {%- else -%}
           <span class="empty-value">There is no contact person specified yet</span>
+        {%- endif -%}
+      </dd>
+
+      <dt>Related DMPs and documents</dt>
+      <dd>
+        {%- if relatedItems|length > 0 -%}
+          <ul>
+            {%- for item in relatedItems -%}
+              <li>
+                {%- if item.relatedDmp and item.relatedDmp._value -%}
+                  <span class="related-name">{{ item.relatedDmp._value }}</span>
+                {%- else -%}
+                  <span class="empty-value">(document not named)</span>
+                {%- endif -%}
+                {%- if item.dmpIdentifier2 and item.dmpIdentifier2._value %}
+                  <br>{{ item.dmpIdentifier2._value }}
+                {%- endif -%}
+                {%- if item.descriptionRelationship and item.descriptionRelationship._value %}
+                  <br>{{ item.descriptionRelationship._value }}
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- elif relatedDmp and relatedDmp._label -%}
+          {{ relatedDmp._label }}
+        {%- else -%}
+          <span class="empty-value">This question has not been answered yet</span>
         {%- endif -%}
       </dd>
 
@@ -57,18 +91,6 @@
       <dt>Project phase</dt>
       <dd>{{ dc.current_phase.title }}</dd>
       {%- endif -%}
-
-      <dt>Created by</dt>
-      <dd>
-        {%- if dc.project.created_by -%}
-          {{ dc.project.created_by.first_name }} {{ dc.project.created_by.last_name }}
-          {%- if dc.project.created_by.email %}
-            <br><a href="mailto:{{ dc.project.created_by.email }}">{{ dc.project.created_by.email }}</a>
-          {%- endif -%}
-        {%- else -%}
-          <span class="empty-value">There is no creator specified yet</span>
-        {%- endif -%}
-      </dd>
 
       {% for version in dc.project.versions if version.uuid == ctx.project.versionUuid %}
       <dt>Version</dt>

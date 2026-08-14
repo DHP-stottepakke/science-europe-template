@@ -20,17 +20,17 @@
 {# ------------------------------------------------------------------------------------ #}
 {#  ANSWER MACROS                                                                        #}
 {# ------------------------------------------------------------------------------------ #}
+{#- See src/_renderers.html.j2: markdown replies are block-level and must not be
+    nested inside <p class="answer">. -#}
 {%- macro renderAnswerValue(question, reply, path) -%}
   <div class="answer-block answer-simple" id="{{path}}" data-path="{{path}}" data-type="answer">
-    <p class="answer">
-      {% if reply is of_type("StringReply") %}
-        <span>{{reply.markdown_plain}}</span>
-      {% elif reply.is_integration or reply.is_legacy_integration %}
-        <span>{{reply.value|markdown}}</span>
-      {% else %}
-        <span>{{reply.value}}</span>
-      {% endif %}
-    </p>
+    {% if reply is of_type("StringReply") %}
+      <p class="answer"><span>{{reply.markdown_plain}}</span></p>
+    {% elif reply.is_integration or reply.is_legacy_integration %}
+      <div class="answer md">{{reply.value|markdown}}</div>
+    {% else %}
+      <p class="answer"><span>{{reply.value}}</span></p>
+    {% endif %}
   </div>
 {%- endmacro -%}
 
@@ -56,7 +56,7 @@
     {% if fq is of_type("ValueQuestion") and fqReply is of_type("StringReply") %}
       <span>{{ fqReply.markdown_plain }}</span>
     {% elif fqReply.is_integration or fqReply.is_legacy_integration %}
-      <span>{{ fqReply.value|markdown }}</span>
+      <div class="md">{{ fqReply.value|markdown }}</div>
     {% elif fq is of_type("OptionsQuestion") and fqReply is of_type("AnswerReply") %}
       <span>{{ fqReply.answer.label }}</span>
     {% elif fq is of_type("MultiChoiceQuestion") and fqReply is of_type("MultiChoiceReply") %}

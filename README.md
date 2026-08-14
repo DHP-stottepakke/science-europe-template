@@ -7,9 +7,11 @@ It is a fork of the [upstream Science Europe template](https://github.com/ds-wiz
 * **Navigation by annotation.** The upstream template addresses the knowledge model through hardcoded question UUIDs. This version navigates by the `json.key` / `json.value` annotations that the Norwegian knowledge model carries, so it contains no UUIDs at all. Which questions appear under which of the 15 Science Europe questions is declared in [`src/_sections.j2`](src/_sections.j2), driven by the knowledge model's *RCN/Science Europe* tag.
 * **Structured answers instead of prose.** The upstream template synthesises English sentences per answer branch. This version keeps the six sections and the 15 numbered questions but renders each knowledge model question with its title and its reply, in the style of the *Questionnaire Report - lean* template: markdown values, tables for item lists with fewer than six sub-questions, comma-separated multiple choices, and an explicit placeholder for questions that have not been answered.
 
+Headings are numbered `<section><letter>` (1a, 1b, 2a, ...) the way the Science Europe guide numbers them, so a heading can be looked up in the guide directly.
+
 Because it relies on `extract_replies`, it requires DSW 4.20 or newer; template metamodel 18.1.
 
-Question 13 (persistent identifiers) has no question of its own in the Norwegian model: PIDs are asked about inside the dataset and software list questions, which appear under questions 10 and 12. Its heading is therefore omitted rather than left empty.
+Question 5d (persistent identifiers) has no question of its own in the Norwegian model: PIDs are asked about inside the dataset and software list questions, which appear under questions 5a and 5c. Its heading is therefore omitted rather than left empty.
 
 
 ## Development
@@ -78,4 +80,6 @@ For the work captured in this thread, the following AI tooling was used:
 
 ### 1.0.0
 
-Initial release of the Norwegian port: new template ID `research.data.no:science-europe-norway`, annotation-based navigation against `research.data.no:norway-generic` 1.2.1+, and lean-style structured answer rendering. Section content is selected by the knowledge model's *RCN/Science Europe* tag; `src/_sections.j2` records the mapping and `tools/check_sections.py`
+Initial release of the Norwegian port: new template ID `research.data.no:science-europe-norway`, annotation-based navigation against `research.data.no:norway-generic` 1.2.1+, and lean-style structured answer rendering. Section content is selected by the knowledge model's *RCN/Science Europe* tag; `src/_sections.j2` records the mapping and `tools/check_sections.py` validates it against the knowledge model.
+
+Front matter and layout: the *Created by* row is gone from the title page and *This DMP is related to other DMP(s) or formal document(s)* takes its place in the metadata table instead of sitting under "Maintenance of this data management plan". All formats now share one title page (`src/header.html.j2`), so the Word export carries the same metadata as the others. Question headings are numbered 1a, 1b, 2a, ... as in the Science Europe guide. Body text, headings, table cells and section spacing are tighter throughout, and markdown replies from integrations are no longer nested inside a paragraph — which is what left the gap after ORCID and other badge-carrying answers; their badges are now scaled to the text size.

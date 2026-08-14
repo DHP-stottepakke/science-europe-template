@@ -50,7 +50,8 @@ h1, h2, h3, h4, h5, h6 {
 
 body {
   font-family: "Open Sans", sans-serif;
-  font-size: 11pt;
+  font-size: 10pt;
+  line-height: 1.35;
   counter-reset: section;
   counter-reset: question;
   max-width: 21cm;
@@ -59,17 +60,37 @@ body {
 
 p {
   margin-top: 0;
-  margin-bottom: 8px;
+  margin-bottom: 0.4em;
+}
+
+h2 {
+  font-size: 15pt;
+  margin: 0 0 0.5em;
+}
+
+h3 {
+  font-size: 12pt;
+  margin: 1em 0 0.35em;
+}
+
+h4 {
+  font-size: 10.5pt;
+  margin: 0 0 0.25em;
+}
+
+ul, ol {
+  margin: 0 0 0.4em;
+  padding-left: 1.4em;
 }
 
 /* Sections */
 
 section {
-  margin-bottom: 4rem;
+  margin-bottom: 1.5rem;
 }
 
 .dmp-section .question + .question {
-  margin-top: 1cm;
+  margin-top: 0.5rem;
 }
 
 /* First page */
@@ -82,13 +103,13 @@ header {
   position: relative;
 }
 
-header .dmp::after {
+header .dmp {
   font-size: 18pt;
-  content: 'Data Management Plan';
 }
 
 h1 {
-  font-size: 24pt;
+  font-size: 22pt;
+  margin: 0 0 0.4em;
 }
 
 header div {
@@ -101,9 +122,9 @@ header .contact-orcid {
 }
 
 header .note {
-  margin-top: 2cm;
+  margin-top: 1cm;
   text-align: center;
-  font-size: 10pt;
+  font-size: 9pt;
   font-style: italic;
 }
 
@@ -121,7 +142,7 @@ dl {
 dt,
 dd {
     box-sizing: border-box;
-    padding: 10px;
+    padding: 5px 8px;
 }
 dd ~ dt,
 dd ~ dd {
@@ -154,10 +175,11 @@ dl dd ul li {
 }
 
 dl dd ul li:not(:last-child) {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
-dl .contact-name {
+dl .contact-name,
+dl .related-name {
   font-weight: bold;
 }
 
@@ -181,6 +203,27 @@ dl .contact-name {
 
 .abstract p {
   text-align: justify;
+}
+
+/* Markdown values from integrations (ORCID, ROR, FAIRsharing, ...) */
+
+.md > p {
+  margin: 0;
+}
+
+.md > p + p {
+  margin-top: 0.25em;
+}
+
+/* Integration templates lead with a shields.io badge whose natural size is well
+   above the text size; left alone it stretches the line it sits on. */
+.md img,
+.answer img,
+.contributor img,
+dl dd img {
+  height: 1.05em;
+  width: auto;
+  vertical-align: -0.15em;
 }
 
 /* custom */
@@ -251,16 +294,16 @@ div#dmp-versions td.no-versions {
    --------------------------------------------------------------------------- */
 
 .question:not(:last-child) {
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.35rem;
 }
 
 .answer-item:not(:last-child) {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.35rem;
 }
 
 .question-header h4 {
   margin-top: 0;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.2rem;
   font-weight: bold;
 }
 
@@ -269,8 +312,8 @@ div#dmp-versions td.no-versions {
 }
 
 .followups {
-  margin-top: 0.5rem;
-  padding-left: 1rem;
+  margin-top: 0.35rem;
+  padding-left: 0.75rem;
   border-left: 2px solid #e9ecef;
 }
 
@@ -280,7 +323,7 @@ div#dmp-versions td.no-versions {
 }
 
 .answer-block {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.35rem;
 }
 
 .answer p, .no-answer p {
@@ -291,7 +334,8 @@ div#dmp-versions td.no-versions {
   vertical-align: middle;
 }
 
-.no-answer {
+.no-answer,
+.empty-value {
   font-style: italic;
   color: #6c757d;
 }
@@ -299,7 +343,7 @@ div#dmp-versions td.no-versions {
 .answer-items-table {
   width: 100%;
   border-collapse: collapse;
-  margin: 0.5em 0 1em 0;
+  margin: 0.35em 0 0.6em 0;
   font-size: 0.95em;
 }
 
@@ -309,16 +353,20 @@ div#dmp-versions td.no-versions {
 
 .answer-items-table th {
   text-align: left;
-  padding: 0.4em 0.75em;
+  padding: 0.25em 0.5em;
   border: 1px solid #ddd;
   font-weight: 600;
   color: #333;
 }
 
 .answer-items-table td {
-  padding: 0.4em 0.75em;
+  padding: 0.25em 0.5em;
   border: 1px solid #ddd;
   vertical-align: top;
+}
+
+.answer-items-table td > .md > p {
+  margin: 0;
 }
 
 .answer-items-table tbody tr:nth-child(even) {
