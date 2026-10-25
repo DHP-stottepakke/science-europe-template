@@ -31,6 +31,10 @@ This document template for DSW is available as open-source via GitHub Repository
 
 ## Changelog
 
+### 3.0.1
+
+- Fixed: the answer "There is no data elsewhere" about backups outside the work space (Question 5) rendered a sentence saying the opposite (that backups are necessary)
+
 ### 3.0.0
 
 - Replies are read by the annotations of the knowledge model (`json.key`, `json.value`) instead of UUIDs; requires the Common DSW Knowledge Model (`dsw.root`) or the Life Sciences DSW Knowledge Model (`dsw.lifesciences`) 2.8.1 or newer

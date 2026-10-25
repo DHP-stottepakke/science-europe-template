@@ -431,11 +431,11 @@ msgstr "Data v databázi budou pouze pro čtení."
 
 #: src/questions/05-store-backup.html.j2:42
 msgid ""
-"Data is stored only in the work space, therefore additional backup copies of files outside work "
-"space are necessary."
+"All project data is stored in the work space; there is no data elsewhere that would need backup "
+"copies."
 msgstr ""
-"Data jsou uložena pouze v pracovním prostoru, proto jsou nutné další záložní kopie souborů mimo "
-"pracovní prostor."
+"Všechna data projektu jsou uložena v pracovním prostoru; mimo něj nejsou žádná data, která by "
+"potřebovala zálohy."
 
 #: src/questions/07-personal-data.html.j2:11
 msgid "Data security protection is described in Section 3, Question 6."
